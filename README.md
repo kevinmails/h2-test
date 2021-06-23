@@ -1,2 +1,2 @@
 # h2-test
-mybatis+h2 database
+springboot2.5 + mybatis + h2 database
