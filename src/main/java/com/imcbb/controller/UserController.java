@@ -1,6 +1,7 @@
 package com.imcbb.controller;
 
 import com.imcbb.dao.User;
+import com.imcbb.listener.OrderCreatedEvent;
 import com.imcbb.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
@@ -43,6 +44,7 @@ public class UserController {
 
         log.info("接到下单请求:{}", user);
         boolean addUser = service.addUser(user);
+        context.publishEvent(new OrderCreatedEvent(this, user));
         if (addUser){
             return "success";
         }
@@ -53,7 +55,6 @@ public class UserController {
     public String getIndex(Model model) {
         Map<String, String> osEnv = System.getenv();
         String sysUser = osEnv.get("USERNAME");
-        osEnv.entrySet().forEach(entry -> log.info("{}", entry));
         User u = User.builder().id(this.getRandomLongInRange(10000, 99999)).userName(sysUser)
                 .orderNo(UUID.randomUUID().toString()).build();
         model.addAttribute("user", u);
