@@ -6,7 +6,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author kevin
+ *
+ * h2 demo
  */
+
 //@EnableAsync
 @SpringBootApplication
 public class H2TestApplication {
