@@ -2,7 +2,7 @@
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}-[%thread][%X{traceId}] %-5level %c{1.}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>
-        <Property name="APP_LOG_ROOT">c:/temp</Property>
+        <Property name="APP_LOG_DIR">c:/temp</Property>
         <Property name="APP_NAME">my-h2</Property>
     </Properties>
     <Appenders>
@@ -11,10 +11,11 @@
         </Console>
 
         <RollingFile name="FileLog"
-                     filePattern="${APP_NAME}.%d{yyyy-MM-dd}-%i.log"
-                     fileName="${APP_LOG_ROOT}/${APP_NAME}.log">
+                     filePattern="${APP_LOG_DIR}/${APP_NAME}.%d{yyyy-MM-dd}.log"
+                     fileName="${APP_LOG_DIR}/${APP_NAME}.log">
             <PatternLayout pattern="${LOG_PATTERN}" />
             <Policies>
+                <!--每日生成一个日志文件-->
                <TimeBasedTriggeringPolicy/>
             </Policies>
             <DefaultRolloverStrategy max="1" />

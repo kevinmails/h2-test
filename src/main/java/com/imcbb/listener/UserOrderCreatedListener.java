@@ -20,5 +20,24 @@ public class UserOrderCreatedListener implements ApplicationListener<OrderCreate
         User user = orderCreatedEvent.getUser();
         log.info("发布事件源:{}", source);
         log.info("用户通知：您好（{}）,下单啦！订单：{}}", user.getUserName(), user.getOrderNo());
+
+        /**
+        * @desc
+        * @author kevin
+        * @date 2021/12/9 0:01
+        * 测试按天滚动日志
+        *
+        */
+        int i = 0;
+        while (true){
+            i += 1;
+            log.info("go go go {} !", i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }
