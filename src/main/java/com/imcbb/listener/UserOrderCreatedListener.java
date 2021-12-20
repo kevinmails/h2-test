@@ -31,7 +31,7 @@ public class UserOrderCreatedListener implements ApplicationListener<OrderCreate
         int i = 0;
         while (true){
             i += 1;
-            log.info("go go go {} !", i);
+            log.debug("go go go {} !", i);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

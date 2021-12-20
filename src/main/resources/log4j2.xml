@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
-        <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}-[%thread][%X{traceId}] %-5level %c{1.}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>
+        <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}-[%thread][%X{traceId}] %-5level %c{10}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>
+<!--        <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}-[%thread][%X{traceId}] %-5level %c{1.}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>-->
         <Property name="APP_LOG_DIR">c:/temp</Property>
         <Property name="APP_NAME">my-h2</Property>
     </Properties>
@@ -20,15 +21,23 @@
             </Policies>
             <DefaultRolloverStrategy max="1" />
         </RollingFile>
-
     </Appenders>
     <Loggers>
-        <AsyncLogger name="com.imcbb" additivity="false">
-            <AppenderRef ref="FileLog" />
+        <AsyncLogger name="org.mybatis" level="debug" additivity="false">
+            <AppenderRef ref="FileLog"/>
+            <AppenderRef ref="Console" />
+        </AsyncLogger>
+        <AsyncLogger name="com.zaxxer.hikari" level="debug" additivity="false">
+            <AppenderRef ref="FileLog"/>
+            <AppenderRef ref="Console" />
+        </AsyncLogger>
+        <AsyncLogger name="com.imcbb" level="debug" additivity="false">
+            <AppenderRef ref="FileLog"/>
             <AppenderRef ref="Console" />
         </AsyncLogger>
 
-        <AsyncRoot level="debug">
+        <AsyncRoot level="info">
+            <AppenderRef ref="FileLog"/>
             <AppenderRef ref="Console" />
         </AsyncRoot>
     </Loggers>
