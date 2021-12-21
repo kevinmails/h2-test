@@ -1,5 +1,6 @@
 package com.imcbb.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -12,6 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * <p>
  * 自己手动创建异步连接池，在springboot项目中，可以在启动类{@link com.imcbb.H2TestApplication}里直接加{@link EnableAsync}注解，无需创建此config
  */
+@Slf4j
 @Configuration
 @EnableAsync
 public class AsyncExecutorConfig {
@@ -21,6 +23,7 @@ public class AsyncExecutorConfig {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         // 获取JAVA虚拟机的可用处理器数量。IO密集型建议核心线程数是该值2倍；计算密集型建议核心线程数是该值1倍
         int processorNum = Runtime.getRuntime().availableProcessors();
+        log.debug("获取处理器数量:{}", processorNum);
         // 设置核心线程数量。若池中的实际线程数小于该值，无论其中是否有空闲的线程，都会产生新的线程
         executor.setCorePoolSize(processorNum * 2);
         // 设置最大线程数量
