@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
-        <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}-[%thread][%X{traceId}] %-5level %c{10}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>
-<!--        <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}-[%thread][%X{traceId}] %-5level %c{1.}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>-->
+<!--        <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}-[%thread][%X{traceId}] %-5level %c{10}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>-->
+        <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}[%thread][%X{traceId}]%-5level %c{1.}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>
         <Property name="APP_LOG_DIR">c:/temp</Property>
         <Property name="APP_NAME">my-h2</Property>
     </Properties>
@@ -14,7 +14,7 @@
         <RollingFile name="FileLog"
                      filePattern="${APP_LOG_DIR}/${APP_NAME}.%d{yyyy-MM-dd}.log"
                      fileName="${APP_LOG_DIR}/${APP_NAME}.log">
-            <PatternLayout pattern="${LOG_PATTERN}" />
+            <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!--每日生成一个日志文件-->
                <TimeBasedTriggeringPolicy/>
@@ -23,15 +23,17 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <AsyncLogger name="org.mybatis" level="debug" additivity="false">
+        <AsyncLogger name="org.mybatis" level="info" additivity="false">
             <AppenderRef ref="FileLog"/>
             <AppenderRef ref="Console" />
         </AsyncLogger>
-        <AsyncLogger name="com.zaxxer.hikari" level="debug" additivity="false">
+        <AsyncLogger name="com.zaxxer.hikari" level="info" additivity="false">
             <AppenderRef ref="FileLog"/>
             <AppenderRef ref="Console" />
         </AsyncLogger>
-        <AsyncLogger name="com.imcbb" level="debug" additivity="false">
+        <!-- includeLocation="true" 打开locationInfo logging with location is 30-100 times slower than without location
+        https://logging.apache.org/log4j/2.x/performance.html#asyncLoggingWithLocation-->
+        <AsyncLogger name="com.imcbb" level="debug" additivity="false" includeLocation="true">
             <AppenderRef ref="FileLog"/>
             <AppenderRef ref="Console" />
         </AsyncLogger>
