@@ -12,7 +12,7 @@ import java.util.UUID;
 
 /**
  * @author kevin
- * @desc 创建拦截器，嵌入mdc日志追踪
+ * @desc 创建拦截器，拦截所有的Controller，嵌入mdc日志追踪
  * @date 2021/12/23 10:42
  */
 @Slf4j
@@ -23,8 +23,8 @@ public class ControllerInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String traceId = String.valueOf(UUID.randomUUID());
-        MDC.put(TRACE_ID, TraceUtil.getTraceId());
+        String traceId = TraceUtil.getTraceId();
+        MDC.put(TRACE_ID, traceId);
         log.debug("Into interceptor...,TRACE_ID:{}", traceId);
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
