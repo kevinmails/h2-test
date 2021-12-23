@@ -1,5 +1,6 @@
 package com.imcbb.config;
 
+import com.imcbb.trace.MdcTaskDecorator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,11 @@ public class AsyncExecutorConfig {
         executor.setAwaitTerminationSeconds(1);
         // 设置拒绝策略，当线程池阻塞队列已满时对新任务的处理。调节机制，即饱和时回退主线程执行
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+
+        /**
+         * 实现异步线程的mdc
+         */
+        executor.setTaskDecorator(new MdcTaskDecorator());
         executor.initialize();
         return executor;
     }

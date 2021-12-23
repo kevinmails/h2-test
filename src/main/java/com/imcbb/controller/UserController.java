@@ -4,6 +4,7 @@ import com.imcbb.dao.User;
 import com.imcbb.listener.OrderCreatedEvent;
 import com.imcbb.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +41,6 @@ public class UserController {
 
     @RequestMapping(value = "addUser", method = RequestMethod.POST)
     public String addUser(@ModelAttribute User user) {
-
-
         log.info("接到下单请求:{}", user);
         boolean addUser = service.addUser(user);
         context.publishEvent(new OrderCreatedEvent(this, user));
