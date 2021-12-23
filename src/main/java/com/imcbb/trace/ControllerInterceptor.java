@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 
 /**
  * @author kevin
@@ -31,6 +30,7 @@ public class ControllerInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        log.debug("post interceptor...,TRACE_ID:{}", MDC.get(TRACE_ID));
         HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 

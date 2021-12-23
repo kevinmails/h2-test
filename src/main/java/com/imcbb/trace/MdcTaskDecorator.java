@@ -16,7 +16,7 @@ public class MdcTaskDecorator implements TaskDecorator {
             try {
                 // @Async thread context
                 // Restore the web thread MDC context
-                if (contextMap != null) {
+                if (null != contextMap) {
                     MDC.setContextMap(contextMap);
                 } else {
                     MDC.clear();
