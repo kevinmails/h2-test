@@ -3,7 +3,7 @@
     <Properties>
 <!--        <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}-[%thread][%X{traceId}] %-5level %c{10}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>-->
         <Property name="LOG_PATTERN">%d{yyyyMMdd HH:mm:ss.SSS}[%thread][%X{traceId}]%-5level %c{1.}-%L TxId:[%X{PtxId}] SpanId:[%X{PspanId}]-%msg%n</Property>
-        <Property name="APP_LOG_DIR">c:/temp</Property>
+        <Property name="APP_LOG_DIR">./log</Property>
         <Property name="APP_NAME">my-h2</Property>
     </Properties>
     <Appenders>

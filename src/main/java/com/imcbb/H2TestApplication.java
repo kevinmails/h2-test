@@ -12,10 +12,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 //@EnableAsync
 @SpringBootApplication
-public class H2TestApplication {
+public class H2TestApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(H2TestApplication.class, args);
 	}
-
 }
